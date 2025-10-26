@@ -75,17 +75,42 @@ PCLT20K/
 └── test.txt
 ```
 
+## Weights & Biases (WandB) Logging
+To enable experiment tracking and visualization with Weights & Biases (WandB):
+1. Export your API key before starting training:
+```bash
+export WANDB_API_KEY=<your_api_key>
+```
+2. Enable logging in any training run using:
+```bash
+--wandb --wandb_project vmambax --wandb_run_name <run-name>
+```
+All logs and metrics will be automatically synchronized to your WandB workspace.
+
 ##  Training
 ### Single-GPU example
 ```bash
 python train.py \
   --img_dir data/PCLT20K \
   --split_train_val_test data/PCLT20K \
-  --batch_size 4 \
+  --batch_size 8 \
   --epochs 50 \
   --lr 6e-5 \
-  --fusion-type context_gate
 ```
+
+### Single-GPU example with WandB Logging
+```bash
+python train.py \
+  --img_dir data/PCLT20K \
+  --split_train_val_test data/PCLT20K \
+  --batch_size 8 \
+  --epochs 50 \
+  --lr 6e-5 \
+   --wandb \
+  --wandb_project vMambaX \
+  --wandb_run_name context-gate \
+```
+
 ### Multi-GPU examples
 - Configure `CUDA_VISIBLE_DEVICES`, `--devices`, and `--nodes` as needed.
 - Enable logging with `--wandb --wandb_project vmambax --wandb_run_name <run-name>`.
@@ -95,11 +120,10 @@ python train.py \
 python train.py \
   --img_dir data/PCLT20K \
   --split_train_val_test data/PCLT20K \
-  --devices 4 \
+  --devices 8 \
   --batch_size 4 \
   --epochs 50 \
   --lr 6e-5 \
-  --fusion-type context_gate
 ```
 
 #### Multi Node
@@ -107,12 +131,11 @@ python train.py \
 python train.py \
   --img_dir data/PCLT20K \
   --split_train_val_test data/PCLT20K \
-  --devices 4 \
+  --devices 8 \
   --nodes 2 \
   --batch_size 4 \
   --epochs 50 \
   --lr 6e-5 \
-  --fusion-type context_gate
 ```
 
 ## Inference and evaluation
@@ -140,7 +163,13 @@ For further information or inquiries, please contact **e.muleroayllon [at] unica
 If you find this code useful, please consider citing our work:
 
 ```bibtex
-@article{
+@inproceedings{ayllon2025can,
+  title={Can Foundation Models Really Segment Tumors? A Benchmarking Odyssey in Lung CT Imaging},
+  author={Ayllón, Elena Mulero and Mantegna, Massimiliano and Shen, Linlin and Soda, Paolo and Guarrasi, Valerio and Tortora, Matteo},
+  booktitle={2025 IEEE 38th International Symposium on Computer-Based Medical Systems (CBMS)},
+  pages={375--380},
+  year={2025},
+  organization={IEEE}
 }
 ```
 
