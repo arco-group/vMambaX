@@ -1,25 +1,31 @@
 <div align="center">
-<h1>Context-Gated Cross-Modal Perception for PET-CT Lung Tumor Segmentation</h1>
-<p>PyTorch Lightning implementation of CIPA on the <a href="https://arxiv.org/abs/2503.17261">PCLT20K</a> dataset</p>
+<h1>Context-Gated Cross-Modal Perception with Visual Mamba for PET-CT Lung Tumor Segmentation
+</h1>
+
+[Elena Mulero Ayllón](https://scholar.google.com/citations?user=-BOMvaUAAAAJ&hl=it&oi=ao)<sup>1</sup>, 
+[Paolo Soda](https://scholar.google.com/citations?user=E7rcYCQAAAAJ&hl=it&oi=ao)<sup>1,2</sup>, 
+[Matteo Tortora](https://matteotortora.github.io)<sup>3</sup>
+
+<sup>1</sup>  University Campus Bio-Medico of Rome,
+<sup>2</sup>  Umeå University,
+<sup>3</sup>  University of Genoa
+
+
+[![arXiv](https://img.shields.io/badge/arXiv-2306.10356-b31b1b.svg)](https://arxiv.org/abs/2306.10356)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 </div>
 
-## 👋 Overview
-- Training and inference pipeline for cross-modal lung tumor segmentation with Mamba-based fusion.
-- Tailored to the <a href="https://arxiv.org/abs/2503.17261">PCLT20K</a> benchmark with support for distributed training, mixed precision, and Weights & Biases logging.
-- Modular design: VMamba encoder, context-gated decoder, dedicated dataloaders for PET-CT, and Lightning utilities.
-- Ready-to-run scripts for SLURM clusters (`train.bash`) and offline inference (`pred.py`).
+## Overview
+This repository contains the code for our paper `Context-Gated Cross-Modal Perception with Visual Mamba for PET-CT Lung Tumor Segmentation` [[Paper](https://arxiv.org/abs/2306.10356)].
 
-## 🗺️ Repository layout
-- `train.py`, `train_v2.py`: Lightning entry points (local or SLURM launches).
-- `pred.py`: evaluation over held-out splits with Dice/IoU/Accuracy/HD95.
-- `models/`, `train_utils/`, `utils/`: backbone definitions, loss functions, PCLT20K dataloaders, helpers.
-- `requirements.txt`: Python dependencies (Lightning, MedPy, optional WandB, etc.).
+![](figures/vmambax.png)
 
-## ⚙️ Environment setup
+
+## Environment Setup
 1. Create a Python 3.10 environment.
    ```bash
-   conda create -n cipa python=3.10
-   conda activate cipa
+   conda create -n vmambax python=3.10
+   conda activate vmambax
    ```
 2. Install PyTorch 2.1.2 (or any CUDA build matching your hardware).
    ```bash
@@ -36,13 +42,12 @@
    cd ../../..
    ```
 
-## 📦 PCLT20K dataset
-PCLT20K contains 21,930 PET-CT pairs with expert lung tumor annotations collected from 605 patients.
+# Setup
+### Dataset
+In this study, we used the **PCLT20K** dataset, which comprises 21,930 PET-CT image pairs with expert-annotated lung tumors collected from 605 patients.  
 
-### Requesting access
-- Email <mailto:jiemei@hnu.edu.cn> with the subject `PCLT20K Access`.
-- Include: full name, affiliation with institutional email domain, academic role, intended (non-commercial) usage.
-- Refer to the paper [Multi-Modal Interactive Perception Network with Mamba for Lung Tumor Segmentation in PET-CT Images](https://arxiv.org/abs/2503.17261) for the full dataset description.
+Further information and data access are available from the official [PCLT20K dataset page](https://github.com/mj129/CIPA/blob/main/README.md#pclt20k) hosted by **CIPA**.
+
 
 ### Preparing the data
 1. Place or symlink the dataset under `data/PCLT20K`.
@@ -70,21 +75,7 @@ PCLT20K/
 └── test.txt
 ```
 
-## 🔄 Custom datasets
-To train on your own PET-CT dataset, keep the same structure:
-```
-<DatasetName>/
-├── <sample_id>/
-│   ├── <sample_id>_CT.<ext>
-│   ├── <sample_id>_PET.<ext>
-│   └── <sample_id>_mask.<ext>
-├── train.txt
-├── val.txt
-└── test.txt
-```
-Each split file lists one `<sample_id>` per line (for example `0001_1234`). The scripts locate the PET/CT/mask files by appending `_PET`, `_CT`, and `_mask` to each identifier.
-
-## 🚀 Training
+##  Training
 ### Single-GPU example
 ```bash
 python train.py \
@@ -95,22 +86,36 @@ python train.py \
   --lr 6e-5 \
   --fusion-type context_gate
 ```
-
-### Multi-GPU / Lightning DDP
+### Multi-GPU examples
 - Configure `CUDA_VISIBLE_DEVICES`, `--devices`, and `--nodes` as needed.
-- Enable logging with `--wandb --wandb_project cipa --wandb_run_name <run-name>`.
-- Disable decoder cross-fusion via `--decoder-disable-cross-fusion`.
-- Switch to the Channel Rectification Module by setting `--fusion-type channel_rectify`.
+- Enable logging with `--wandb --wandb_project vmambax --wandb_run_name <run-name>`.
 
-### SLURM example
-Edit `train.bash` with your SLURM account, paths, and resource requirements, then submit:
+#### Single Node
 ```bash
-sbatch train.bash
+python train.py \
+  --img_dir data/PCLT20K \
+  --split_train_val_test data/PCLT20K \
+  --devices 4 \
+  --batch_size 4 \
+  --epochs 50 \
+  --lr 6e-5 \
+  --fusion-type context_gate
 ```
 
-Lightning checkpoints are stored in `lightning_logs/`, while exported `.pth` weights reside in `checkpoints/`.
+#### Multi Node
+```bash
+python train.py \
+  --img_dir data/PCLT20K \
+  --split_train_val_test data/PCLT20K \
+  --devices 4 \
+  --nodes 2 \
+  --batch_size 4 \
+  --epochs 50 \
+  --lr 6e-5 \
+  --fusion-type context_gate
+```
 
-## 🧪 Inference and evaluation
+## Inference and evaluation
 1. Download or select a checkpoint (`.ckpt` from Lightning or `.pth` weights).
 2. Run:
    ```bash
@@ -123,10 +128,23 @@ Lightning checkpoints are stored in `lightning_logs/`, while exported `.pth` wei
 3. Metrics reported: IoU, Dice, Accuracy, and HD95. Results are written to `results/`.
 
 ### Pretrained weights
-- [CIPA.pth – Google Drive](https://drive.google.com/file/d/1x525pjCi4RM51Kv_zbuW7OLx7NPBLRa8/view?usp=sharing)
-- [CIPA.pth – Baidu Yun (pwd: CIPA)](https://pan.baidu.com/s/14MfEaSvc-4QFOIWR7w93Tw)
 
-## 🙏 Acknowledgements
-- This project builds upon the original CIPA repository (Multi-Modal Interactive Perception Network with Mamba for Lung Tumor Segmentation in PET-CT Images).
-- We gratefully acknowledge the open-source contributions of [VMamba](https://github.com/MzeroMiko/VMamba) and [Sigma](https://github.com/zifuwan/Sigma).
-- The PCLT20K dataset is provided by Jie Mei et al. (CVPR 2025); we thank the authors for making their work available.
+
+## Contact
+
+For further information or inquiries, please contact **e.muleroayllon [at] unicampus [dot] it** and/or **matteo.tortora [at] unige [dot] it**.
+
+
+## BibTeX & Citation
+
+If you find this code useful, please consider citing our work:
+
+```bibtex
+@article{
+}
+```
+
+## Acknowledgements
+This work builds on the original [CIPA](https://github.com/mj129/CIPA) repository.  
+We also acknowledge the valuable open-source contributions of [VMamba](https://github.com/MzeroMiko/VMamba) and [Sigma](https://github.com/zifuwan/Sigma).
+
