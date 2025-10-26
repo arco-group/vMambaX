@@ -108,7 +108,7 @@ python train.py \
   --batch_size 8 \
   --epochs 50 \
   --lr 6e-5 \
-   --wandb \
+  --wandb \
   --wandb_project vMambaX \
   --wandb_run_name context-gate \
 ```
