@@ -56,7 +56,7 @@ Further information and data access are available from the official [PCLT20K dat
    ln -s /path/to/PCLT20K data/PCLT20K
    ```
 2. Ensure `train.txt`, `test.txt`, and optionally `val.txt` are located in the dataset root.
-3. When using WandB, export `WANDB_API_KEY` before starting training.
+
 
 ### Required directory structure
 ```
@@ -113,7 +113,6 @@ python train.py \
 
 ### Multi-GPU examples
 - Configure `CUDA_VISIBLE_DEVICES`, `--devices`, and `--nodes` as needed.
-- Enable logging with `--wandb --wandb_project vmambax --wandb_run_name <run-name>`.
 
 #### Single Node
 ```bash
