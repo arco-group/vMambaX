@@ -42,7 +42,7 @@ This repository contains the code for our paper `Context-Gated Cross-Modal Perce
    cd ../../..
    ```
 
-# Setup
+## Setup
 ### Dataset
 In this study, we used the **PCLT20K** dataset, which comprises 21,930 PET-CT image pairs with expert-annotated lung tumors collected from 605 patients.  
 
@@ -75,7 +75,9 @@ PCLT20K/
 └── test.txt
 ```
 
-## Weights & Biases (WandB) Logging
+### Pretrained weights
+
+### Weights & Biases (WandB) Logging
 To enable experiment tracking and visualization with Weights & Biases (WandB):
 1. Export your API key before starting training:
 ```bash
@@ -114,7 +116,7 @@ python train.py \
 ### Multi-GPU examples
 - Configure `CUDA_VISIBLE_DEVICES`, `--devices`, and `--nodes` as needed.
 
-#### Single Node
+### Single Node
 ```bash
 python train.py \
   --img_dir data/PCLT20K \
@@ -125,7 +127,7 @@ python train.py \
   --lr 6e-5 \
 ```
 
-#### Multi Node
+### Multi Node
 ```bash
 python train.py \
   --img_dir data/PCLT20K \
@@ -148,8 +150,6 @@ python train.py \
      --device cuda
    ```
 3. Metrics reported: IoU, Dice, Accuracy, and HD95. Results are written to `results/`.
-
-### Pretrained weights
 
 
 ## Contact
