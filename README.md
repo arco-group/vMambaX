@@ -3,12 +3,20 @@
 </h1>
 
 [Elena Mulero Ayllón](https://scholar.google.com/citations?user=-BOMvaUAAAAJ&hl=it&oi=ao)<sup>1</sup>, 
-[Paolo Soda](https://scholar.google.com/citations?user=E7rcYCQAAAAJ&hl=it&oi=ao)<sup>1,2</sup>, 
-[Matteo Tortora](https://matteotortora.github.io)<sup>3</sup>
+[Linlin Shen](https://scholar.google.com/citations?user=AZ_y9HgAAAAJ&hl=en)<sup>2</sup>, 
+[Pierangelo Veltri](https://scholar.google.com/citations?user=dfx_8LwAAAAJ&hl=en)<sup>3</sup>,
+[Fabrizia Gelardi](https://scholar.google.com/citations?user=rVSkwbAAAAAJ&hl=it)<sup>4,5</sup>,
+[Arturo Chiti](https://www.hsr.it/dottori/arturo-chiti)<sup>4,5</sup>,
+[Paolo Soda](https://scholar.google.com/citations?user=E7rcYCQAAAAJ&hl=it&oi=ao)<sup>1,6</sup>, 
+[Matteo Tortora](https://matteotortora.github.io)<sup>7</sup>
 
 <sup>1</sup>  University Campus Bio-Medico of Rome,
-<sup>2</sup>  Umeå University,
-<sup>3</sup>  University of Genoa
+<sup>2</sup> Shenzhen University,
+<sup>3</sup> University of Calabria,
+<sup>4</sup> IRCCS San Raffaele Hospital,
+<sup>5</sup> Vita-Salute San Raffaele University,
+<sup>6</sup>  Umeå University,
+<sup>7</sup>  University of Genoa
 
 
 [![arXiv](https://img.shields.io/badge/arXiv-2306.10356-b31b1b.svg)](https://arxiv.org/abs/2306.10356)
