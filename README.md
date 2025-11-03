@@ -19,12 +19,12 @@
 <sup>7</sup>  University of Genoa
 
 
-[![arXiv](https://img.shields.io/badge/arXiv-2306.10356-b31b1b.svg)](https://arxiv.org/abs/2306.10356)
+[![arXiv](https://img.shields.io/badge/arXiv-2306.10356-b31b1b.svg)](https://arxiv.org/abs/2510.27508)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 </div>
 
 ## Overview
-This repository contains the code for our paper `Context-Gated Cross-Modal Perception with Visual Mamba for PET-CT Lung Tumor Segmentation` [[Paper](https://arxiv.org/abs/2306.10356)].
+This repository contains the code for our paper `Context-Gated Cross-Modal Perception with Visual Mamba for PET-CT Lung Tumor Segmentation` [[Paper](https://arxiv.org/abs/2510.27508)].
 
 ![](figures/vmambax.png)
 
@@ -170,13 +170,14 @@ For further information or inquiries, please contact **e.muleroayllon [at] unica
 If you find this code useful, please consider citing our work:
 
 ```bibtex
-@inproceedings{ayllon2025can,
-  title={Can Foundation Models Really Segment Tumors? A Benchmarking Odyssey in Lung CT Imaging},
-  author={Ayllón, Elena Mulero and Mantegna, Massimiliano and Shen, Linlin and Soda, Paolo and Guarrasi, Valerio and Tortora, Matteo},
-  booktitle={2025 IEEE 38th International Symposium on Computer-Based Medical Systems (CBMS)},
-  pages={375--380},
-  year={2025},
-  organization={IEEE}
+@misc{ayllon2025context,
+      title={Context-Gated Cross-Modal Perception with Visual Mamba for PET-CT Lung Tumor Segmentation}, 
+      author={Elena Mulero Ayllón and Linlin Shen and Pierangelo Veltri and Fabrizia Gelardi and Arturo Chiti and Paolo Soda and Matteo Tortora},
+      year={2025},
+      eprint={2510.27508},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2510.27508}, 
 }
 ```
 
