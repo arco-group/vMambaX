@@ -24,7 +24,9 @@
 </div>
 
 ## Overview
-This repository contains the code for our paper `Context-Gated Cross-Modal Perception with Visual Mamba for PET-CT Lung Tumor Segmentation` [[Paper](https://arxiv.org/abs/2510.27508)].
+<!-- This repository contains the code for our paper `Context-Gated Cross-Modal Perception with Visual Mamba for PET-CT Lung Tumor Segmentation` [[Paper](https://arxiv.org/abs/2510.27508)]. -->
+
+This repository will contain the code for our paper `Context-Gated Cross-Modal Perception with Visual Mamba for PET-CT Lung Tumor Segmentation` [[Paper](https://arxiv.org/abs/2510.27508)] once accepted.
 
 ![](figures/vmambax.png)
 
