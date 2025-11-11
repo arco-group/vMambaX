@@ -45,7 +45,7 @@ This repository contains the code for our paper `Context-Gated Cross-Modal Perce
    ```
 4. Build the `selective_scan` CUDA operator.
    ```bash
-   cd models/encoders/selective_scan
+   cd src/models/encoders/selective_scan
    pip install .
    cd ../../..
    ```
